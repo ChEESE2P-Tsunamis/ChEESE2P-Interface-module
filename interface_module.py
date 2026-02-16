@@ -38,6 +38,17 @@ Arguments that need/can to be provided:
 Regarding the donor_output, note that SeisSol requires a filename, while Bingclaw requires the path to the directory where the (ESRI ASCII) output files are located
 """
 
+#==========================================================================
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
 # Generic modules that are needed 
 import argparse
 import time
@@ -73,9 +84,13 @@ parser.add_argument(
     default="hysea",)
 parser.add_argument("--resolution", help="spatial resolution for both horizontal directions (in m)", 
     default=0.0)
-parser.add_argument("--only_donor_domain", 
-    help="handle to only use the domain given by the donor model; default: False", 
-    default=False)
+parser.add_argument("--only_donor_domain", type=str2bool, nargs='?',
+    const=True, default=False,
+    help="handle to only use the domain given by the donor model; default: False",
+    required=False )
+#parser.add_argument("--only_donor_domain", 
+#    help="handle to only use the domain given by the donor model; default: False", 
+#    default=False)
 parser.add_argument("-f", "--filter", 
     help="filter for the deformation data where filter = none, kajiura; default: none",
     default='none')
