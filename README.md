@@ -1,4 +1,4 @@
-# Interface module for the WP6 tsunami workflow
+# Interface module for the WP6 tsunami workflow 
 
 This module consists of three main parts:
   * Reading/getting input from one of the donor models (SeisSol, SHALTOP, Bingclaw)
